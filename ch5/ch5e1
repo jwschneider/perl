@@ -1,0 +1,9 @@
+#!/usr/bin/perl
+my @inp;
+while(<>) {
+  unshift @inp, $_;
+}
+foreach (@inp) {
+  print $_;
+}
+

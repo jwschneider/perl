@@ -1,0 +1,6 @@
+#!/usr/bin/perl
+@lst = qw/ fred betty barney dino wilma pebbles bamm-bamm /;
+foreach $int (@lines = <STDIN>) {
+  print $lst[$int] . "\n";
+}
+

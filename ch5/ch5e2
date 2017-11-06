@@ -1,0 +1,8 @@
+#!/usr/bin/perl
+print 1234567890 x 6 . "\n";
+chomp($len = <STDIN>);
+$len += 1;
+while(<STDIN>) {
+  printf "%${len}s", $_;
+}
+

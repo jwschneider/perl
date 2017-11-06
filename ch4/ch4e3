@@ -1,0 +1,25 @@
+#!/usr/bin/perl
+
+sub above_average {
+  my(@ret);
+  $avg = &average(@_);
+  foreach (@_) {
+    if ($_ > $avg) {
+      push @ret, $_;
+    }
+  }
+  @ret;
+}
+
+sub average {
+  my $sum;
+  foreach (@_) {
+    $sum += $_;
+  }
+  $sum / @_;
+}
+
+my @fred = &above_average(1..10);
+print "\@fred is @fred\n";
+my @barney = &above_average(100, 1..10);
+print "\@barney is @barney\n";
