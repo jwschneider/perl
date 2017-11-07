@@ -1,0 +1,17 @@
+#!/usr/bin/perl
+%last_name = (
+  "Danny" => "White",
+  "Jose" => "Luna",
+  "Vince" => "Memmo",
+  "Nathan" => "Park",
+  "Brian" => "Blankenship",
+  "Mickey" => "Matiss",
+  );
+while (chomp ($name = <STDIN>)) {
+  if (exists $last_name{$name}) {
+    print "$name $last_name{$name}\n";
+  } else {
+    print "$name is not a brother\n";
+  };
+};
+

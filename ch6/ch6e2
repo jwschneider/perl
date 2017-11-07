@@ -1,0 +1,20 @@
+#!/usr/bin/perl
+my %dict;
+while(<STDIN>) {
+  chomp;
+  if (!exists $dict{$_}) {
+    $dict{$_} = 1
+  } else {
+    $dict{$_} += 1
+  }
+}
+$max = 0;
+foreach $w (keys %dict) {
+  if (length $w > $max) {
+    $max = length $w;
+  }
+}
+foreach $w (sort keys %dict) {
+  printf "%${max}s ", $w;
+  print "$dict{$w}\n";
+} 
