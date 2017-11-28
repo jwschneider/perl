@@ -1,0 +1,9 @@
+#!/usr/bin/perl
+while (<STDIN>) {
+  chomp;
+  if (/(\w+a)\b(.{5})/) {
+    print "Matched: |$`<$&>$'|\n";
+  } else {
+    print "No match: |$_|\n";
+  }
+}

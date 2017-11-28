@@ -1,0 +1,14 @@
+#!usr/bin/perl
+$max;
+$dbug = 0;
+$eldest;
+foreach (@ARGV) {
+  if ((-M $_) > $max) {
+    print ((-M $_) . "\n") if $dbug;
+    print $max if $dbug;
+    print $_ . "\n" if $dbug;
+    $eldest = $_;
+    $max = -M _;
+  }
+}
+print "$eldest is the eldest\n";

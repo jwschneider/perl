@@ -1,0 +1,7 @@
+#!/usr/bin/perl
+while(<STDIN>) {
+  if (/[fF][rR][eE][dD]/) {
+    print $_;
+  }
+}
+

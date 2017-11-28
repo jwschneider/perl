@@ -1,0 +1,14 @@
+#!/usr/bin/perl
+my $in = $ARGV[0];
+if (! $in ) {
+  die "Unrecognized file\n";
+}
+my $out = $in;
+$out =~ s/\.\w+/\.out/;
+open IN, $in;
+open OUT, ">$out";
+while (<IN>) {
+  s/kent/john/i;
+  print OUT $_;
+}
+

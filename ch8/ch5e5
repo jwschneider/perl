@@ -1,0 +1,7 @@
+#!/usr/bin/perl
+while(<STDIN>) {
+  chomp;
+  if (/\s+$/) {
+    print "$_ <endln>\n";
+  }
+}

@@ -1,0 +1,16 @@
+#!/usr/bin/perl
+
+foreach (@ARGV) {
+  print "$_ " . &attr($_) . "\n";
+}
+
+sub attr {
+  my $file = shift @_;
+  return "does not exist" unless -e $file;
+  my @attrs;
+  push @attrs, "readable" if -r _;
+  push @attrs, "writeable" if -w _;
+  push @attrs, "excutable" if -x _;
+  return "exists" unless @attrs;
+  return "is " . join " and ", @attrs;
+}

@@ -1,0 +1,124 @@
+#!usr/bin/perl
+$ln;
+$wd;
+while (1){
+  $_ = &dims;
+  if (/(\d+),\s*(\d+)/) {
+    $ln = $1;
+    $wd = $2;
+    last;
+  } else {
+    print "Please try again in the form: length, width\n";
+  }
+}
+@field = (0)x($ln*$wd + 1);
+#add edges
+for ($i = 0; $i < $ln; $i++) {
+  for ($j = 0; $j < $wd; $j++) {
+    if ($i == 0 || $i == $ln - 1 || $j == 0 || $j == $wd - 1) {
+      $field[$i*$wd + $j] = 1;
+    }
+  }
+}
+#add inp, out
+$field[2*$wd - 1] = 0;
+$field[($ln-2)*$wd] = 0;
+#place mines
+while (1) {
+  $_ = &num_mines;
+  if (/(\d+)/) {
+    $mines = $1;
+    if ($mines < (($ln -1) * ($wd -1 ))/2) {
+      last;
+    }
+  }
+}
+while ($mines > 0) {
+  my $mine = int(rand($#field));
+  if ((&valid_mine($mine)) && ($field[$mine] >= 0)) {
+    $field[$mine] = -1;
+    $mines--; 
+  }
+}
+$robot = ($ln-2)*$wd; 
+$field[$robot] = "M";
+&print_field(\@field);
+while (<STDIN>) {
+  chomp;
+  my $mv = &move($_);
+  if (($mv > 0) && (&valid_tile($mv))) {
+    $field[$robot] = 0;
+    $robot = $mv;
+    $field[$robot] = "M";
+    &print_field(\@field);
+  } else {
+    print "Invalid move\n";
+  }
+}
+
+
+sub dims {
+  print "Please enter the dimensions of the minefield.\n";
+  $line = <STDIN>;
+  $line;
+}
+sub print_field {
+  my @field = @{$_[0]};
+  for ($i = 0; $i < $#field; $i++) {
+    &print_tile($field[$i]);
+    if (($i+1) % $wd == 0) {
+      print "\n";
+    }
+  }
+}
+sub num_mines {
+  print "Enter number of mines to add.\n";
+  $line = <STDIN>;
+  chomp;
+  $line;
+}
+
+sub valid_mine {
+  my $mine = $_[0];
+  my $bl = !(($mine - $wd < 0) || ($mine % $wd == 0) || (($mine + 1) % $wd == 0)
+    || ($mine + $wd >= $ln * $wd) || ($mine == 2*$wd - 1)
+    || ($mine == ($ln-2)*$wd) || ($mine == 2*$wd -2 ) || ($mine == ($ln-2)*$wd + 1));
+  $bl;
+}
+sub valid_tile {
+  my $tile = $_[0];
+  my $bl = !(($tile - $wd < 0) || (($tile % $wd == 0) && !($tile == ($ln-2)*$wd))
+    || ((($tile + 1) % $wd == 0) && !($tile == 2*$wd - 1))
+    || ($tile + $wd >= $ln * $wd));
+  $bl
+}
+
+sub print_tile {
+  my $tile = $_[0];
+  if ($tile > 0) {
+    print "+";
+  } elsif ($tile < 0) {
+    print "*";
+  } else {
+    if ($tile == $robot) {
+      print "M";
+    } else {
+    print $tile;
+  }
+  }
+}
+#math for moves
+sub move {
+  $dir = $_[0];
+  if ($dir eq "W") {
+    return $robot - 1;
+  } elsif ($dir eq "N") {
+    return $robot - $wd;
+  } elsif ($dir eq "E") {
+    return $robot + 1;
+  } elsif ($dir eq "S") {
+    return $robot + $wd;
+  } else {
+    return -1;
+  }
+}

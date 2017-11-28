@@ -1,0 +1,6 @@
+#!/usr/bin/perl
+while (<STDIN>) {
+  if (/\./) {
+    print $_;
+  }
+}

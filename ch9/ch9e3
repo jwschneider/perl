@@ -1,0 +1,19 @@
+#!/usr/bin/perl
+%todo;
+foreach (@ARGV) {
+  $todo{$_} = 1;
+}
+while (<>) {
+  if (/^##\s*Copyright/i) {
+    delete $todo{$ARGV};
+  }
+}
+@ARGV = sort keys %todo;
+$^I = ".bak";
+while (<>) {
+  if (/^#!/) {
+    $_ .= "##Copyright 2017 John Schneider\n";
+  }
+  print;
+}
+
