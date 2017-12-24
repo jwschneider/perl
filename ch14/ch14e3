@@ -1,0 +1,11 @@
+#!/usr/bin/perl
+my %task;
+my @days = qw/ Mon Tue Wed Thu Fri Sat Sun/;
+for (my $i; $i<@days; $i++) {
+  $task{$days[$i]} = "go play\n" if $i > 4;
+  $task{$days[$i]} = "go to work\n" if $i <= 4;
+};
+$_ = `date`;
+my ($day, $mon, $date, $time, $zone, $year) = /(\w+)\s+(\w+)\s+(\d+)\s+([\d|:]+)\s+(\w+)\s+(\w+)/;
+print "Today is $day the $date of $mon, $year. The time is $time, $zone.\n";
+print $task{$day};

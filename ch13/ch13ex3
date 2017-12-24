@@ -1,0 +1,10 @@
+#!/usr/bin/perl
+chomp (my $string = <STDIN>);
+chomp (my $substr = <STDIN>);
+while (1) {
+  $loc = index($string, $substr);
+  last if $loc < 0;
+  print $loc . "\n";
+  $string = substr $string, $loc + 1;
+}
+

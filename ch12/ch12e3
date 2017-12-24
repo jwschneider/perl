@@ -1,0 +1,12 @@
+#!/usr/bin/perl
+print "Please enter a directory to chdir to:\n";
+chomp (my $dir = <STDIN>);
+if ($dir =~ /^\s*$/) {
+  chdir or die "Cannot chdir to homedirectory: $!";
+} else {
+  chdir $dir or die "Cannot chdir to $dir: $!";
+}
+opendir DH, "." or die "Cannot open $dir: $!";
+foreach (readdir DH) {
+  print "$_\n" unless (/^\./);
+}

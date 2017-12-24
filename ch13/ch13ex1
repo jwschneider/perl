@@ -1,0 +1,6 @@
+#!/usr/bin/perl
+my @nums;
+push @nums, split while <>;
+foreach (sort { $a <=> $b } @nums) {
+  printf "%20g\n", $_
+};

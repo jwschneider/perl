@@ -1,0 +1,8 @@
+#!/usr/bin/perl
+
+use File::Basename;
+
+my @files = `perl ch15e2`;
+foreach (@files) {
+  print basename($_);
+}

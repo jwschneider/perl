@@ -1,0 +1,25 @@
+#!/usr/bin/perl
+
+$filename = "test.inp";
+open IN, $filename or die "Cannot open file $filename: $!";
+my $lines;
+while (<IN>) {
+  chomp;
+  push @lines, $_;
+}
+
+while (1) {
+  print "Enter a pattern:\n";
+  chomp (my $in = <STDIN>);
+  last unless $in;
+  eval {
+    my @matches;
+    for (my $i = 0; $i < @lines; $i++) {
+      push(@matches, $i) if ($lines[$i] =~ /$in/);
+    }
+    print "There are ", scalar @matches, " matches:\n";
+    map { print $_ . "\n" } (@lines)[@matches];
+  };
+  print "Invalid pattern\n" if $@;
+}
+

@@ -1,0 +1,5 @@
+#!/usr/bin/perl
+open STDOUT, ">ls.out";
+open STDERR, ">ls.err";
+chdir ".." or die "Could not change to root directory: $!";
+system "ls -l";

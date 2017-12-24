@@ -1,0 +1,13 @@
+#!/usr/bin/perl
+print "Please enter a directory to chdir to\n";
+chomp (my $dir = <STDIN>);
+if ($dir =~ /^\s*$/) {
+  chdir or die "cannot chdir to home directory: $!";
+} else {
+  chdir $dir or die "cannot chdir to $dir: $!";
+}
+my @files = glob "* .*";
+foreach ( @files ) {
+  print $_ . "\n";
+}
+

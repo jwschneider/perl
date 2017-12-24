@@ -1,0 +1,8 @@
+#!/usr/bin/perl
+if (@ARGV == 2) {
+  ($source, $dest) = @ARGV;
+  if (-d $dest) {
+    $dest = "$dest/$source";
+  }
+  rename $source, $dest or die "Cannot rename $source to $dest: $!";
+}

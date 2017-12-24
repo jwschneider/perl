@@ -1,0 +1,12 @@
+#!/usr/bin/perl
+
+use Cwd;
+
+use File::Spec;
+
+my $dir = getcwd();
+
+foreach (glob "* .*") {
+  $file = File::Spec->catfile($dir, $_);
+  print $file . "\n";
+}

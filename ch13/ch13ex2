@@ -1,0 +1,19 @@
+#!/usr/bin/perl
+my %last_name = qw{
+  fred flintstone
+  Wilma Flintstone
+  Barney Rubble
+  betty rubble
+  Bamm-Bamm Rubble
+  PEBBLES FLINTSTONE
+  };
+my @sorted = sort by_name keys %last_name;
+foreach (@sorted) {
+  print "$last_name{$_}, $_\n";
+}
+
+sub by_name {
+  "\L$last_name{$a}" cmp "\L$last_name{$b}"
+    or 
+  "\L$a" cmp "\L$b"
+}
